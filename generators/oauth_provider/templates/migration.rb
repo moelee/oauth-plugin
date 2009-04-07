@@ -9,8 +9,7 @@ class CreateOauthTables < ActiveRecord::Migration
       t.string :secret, :limit => 50
       t.integer :user_id
       #start_additions
-      t.string :resource_scope
-      t.string :public_key
+      t.text :public_key
       #end_additions
 
       t.timestamps
@@ -44,13 +43,12 @@ class CreateOauthTables < ActiveRecord::Migration
     create_table :child_sps do |t|
       t.string :base_url
       t.string :shared_secret
-      t.string :resources
 
       t.timestamps
     end
     add_index :child_sps, :unique
 
-    create_table :table_resources do |t|
+    create_table :resources do |t|
       t.string :name
       t.integer :child_sp_id
 
@@ -67,7 +65,7 @@ class CreateOauthTables < ActiveRecord::Migration
     drop_table :oauth_nonces
     #start_addition
     drop_table :child_sps
-    drop_table :table_resources
+    drop_table :resources
     #end_addition
   end
 
